@@ -1,13 +1,26 @@
 from stats import get_num_words, count_characters, create_alphanum_list
+import sys
 
-FRANKENSTEIN_BOOK_PATH = './books/frankenstein.txt'
 
 def get_book_text(path_to_book):
     with open(path_to_book) as f:
         return f.read()
 
 def main():
-    book_text = get_book_text(FRANKENSTEIN_BOOK_PATH)
+
+    if len(sys.argv) != 2:
+        print('📜 Usage: python3 main.py <path_to_book>')
+        sys.exit(1)
+
+    # finding args - main.py books/frankenstein.txt
+    book_path = sys.argv[1]
+
+    if book_path is None:
+        print('❌ Book path not provided, exiting the bot.')
+        sys.exit(1)
+
+
+    book_text = get_book_text(book_path)
     word_amount = get_num_words(book_text)
 
     print("============ BOOKBOT ============")
